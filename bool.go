@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 )
 
+// Nullable boolean type based on sql.NullBool, that supports parsing to/from JSON.
 type Bool struct {
 	sql.NullBool
 }

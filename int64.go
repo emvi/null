@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 )
 
+// Nullable int64 type based on sql.NullInt64, that supports parsing to/from JSON.
 type Int64 struct {
 	sql.NullInt64
 }

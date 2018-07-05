@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 )
 
+// Nullable string type based on sql.NullString, that supports parsing to/from JSON.
 type String struct {
 	sql.NullString
 }
