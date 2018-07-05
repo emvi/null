@@ -21,6 +21,10 @@ func main() {
     str := NullableString{null.String{sql.NullString{String: "nullable string", Valid: true}}}
     data, _ := json.Marshal(str)
     fmt.Println(string(data)) // -> {"value": "nullable"}
+
+    str.Valid = false
+    data, _ = json.Marshal(str)
+    fmt.Println(string(data)) // -> {"value": null}
 }
 ```
 
