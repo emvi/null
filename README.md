@@ -22,7 +22,11 @@ go get github.com/emvicom/null
 
 ## Usage
 
+Here is a short example demonstrating the string type. The other types (int64, float64 and bool) work in the same way.
+
 ```
+package main
+
 import (
     "encoding/json"
     "database/sql"
@@ -36,15 +40,20 @@ type NullableString struct {
 }
 
 func main() {
-    str := NullableString{null.String{sql.NullString{String: "nullable string", Valid: true}}}
+    str := null.NewString("nullable string", true)
+    // or long version: str := NullableString{null.String{sql.NullString{String: "nullable string", Valid: true}}}
     data, _ := json.Marshal(str)
     fmt.Println(string(data)) // -> {"value": "nullable"}
 
-    str.Valid = false
+    str.SetNil() // use str.SetValid("value") to set a value again
     data, _ = json.Marshal(str)
     fmt.Println(string(data)) // -> {"value": null}
 }
 ```
+
+## Contribute
+
+[See CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 

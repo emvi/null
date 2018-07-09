@@ -10,6 +10,12 @@ type Bool struct {
 	sql.NullBool
 }
 
+// Returns a new nullable Bool object.
+// This is equivalent to `null.Bool{sql.NullBool{Bool: b, Valid: valid}}`.
+func NewBool(b, valid bool) Bool {
+	return Bool{sql.NullBool{Bool: b, Valid: valid}}
+}
+
 func (this Bool) MarshalJSON() ([]byte, error) {
 	if this.Valid {
 		return json.Marshal(this.Bool)
@@ -33,4 +39,16 @@ func (this *Bool) UnmarshalJSON(data []byte) error {
 	}
 
 	return nil
+}
+
+// Sets the value and valid to true.
+func (this *Bool) SetValid(b bool) {
+	this.Bool = b
+	this.Valid = true
+}
+
+// Sets the value to default and valid to false.
+func (this *Bool) SetNil() {
+	this.Bool = false
+	this.Valid = false
 }

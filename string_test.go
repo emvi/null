@@ -10,6 +10,14 @@ type testString struct {
 	Value String `json:"value"`
 }
 
+func TestNewString(t *testing.T) {
+	value := NewString("test", true)
+
+	if value.String != "test" || !value.Valid {
+		t.Fatal("New String must have value and be valid")
+	}
+}
+
 func TestMarshalString(t *testing.T) {
 	value := String{sql.NullString{String: "test", Valid: true}}
 
@@ -44,5 +52,20 @@ func TestUnmarshalString(t *testing.T) {
 
 	if value.Value.Valid {
 		t.Fatal("Unmarshalled null string must be invalid")
+	}
+}
+
+func TestGettersSettersString(t *testing.T) {
+	value := NewString("test", true)
+	value.SetNil()
+
+	if value.String != "" || value.Valid {
+		t.Fatal("String must be nil")
+	}
+
+	value.SetValid("test")
+
+	if value.String != "test" || !value.Valid {
+		t.Fatal("String must be valid")
 	}
 }
