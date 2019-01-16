@@ -4,9 +4,9 @@
 
 # Nullable Go types
 
-[![GoDoc](https://godoc.org/github.com/emvicom/null?status.svg)](https://godoc.org/github.com/emvicom/null)
-[![CircleCI](https://circleci.com/gh/emvicom/null.svg?style=svg)](https://circleci.com/gh/emvicom/null)
-[![Go Report Card](https://goreportcard.com/badge/github.com/emvicom/null)](https://goreportcard.com/report/github.com/emvicom/null)
+[![GoDoc](https://godoc.org/github.com/emvi/null?status.svg)](https://godoc.org/github.com/emvi/null)
+[![CircleCI](https://circleci.com/gh/emvi/null.svg?style=svg)](https://circleci.com/gh/emvi/null)
+[![Go Report Card](https://goreportcard.com/badge/github.com/emvi/null)](https://goreportcard.com/report/github.com/emvi/null)
 
 ## Description
 
@@ -17,7 +17,7 @@ This package provides nullable Go types that replace sql.NullString, sql.NullInt
 To install "null", run go get within your project:
 
 ```
-go get github.com/emvicom/null
+go get github.com/emvi/null
 ```
 
 ## Usage
@@ -32,7 +32,7 @@ import (
     "database/sql"
     "fmt"
 
-    "github.com/emvicom/null"
+    "github.com/emvi/null"
 )
 
 type NullableString struct {
