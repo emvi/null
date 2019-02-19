@@ -5,26 +5,28 @@ import (
 	"encoding/json"
 )
 
-// Nullable boolean type based on sql.NullBool, that supports parsing to/from JSON.
+// Bool is a nullable boolean type based on sql.NullBool, that supports parsing to/from JSON.
 type Bool struct {
 	sql.NullBool
 }
 
-// Returns a new nullable Bool object.
+// NewBool returns a new nullable Bool object.
 // This is equivalent to `null.Bool{sql.NullBool{Bool: b, Valid: valid}}`.
 func NewBool(b, valid bool) Bool {
 	return Bool{sql.NullBool{Bool: b, Valid: valid}}
 }
 
-func (this Bool) MarshalJSON() ([]byte, error) {
-	if this.Valid {
-		return json.Marshal(this.Bool)
+// MarshalJSON implements the encoding json interface.
+func (b Bool) MarshalJSON() ([]byte, error) {
+	if b.Valid {
+		return json.Marshal(b.Bool)
 	}
 
 	return json.Marshal(nil)
 }
 
-func (this *Bool) UnmarshalJSON(data []byte) error {
+// UnmarshalJSON implements the encoding json interface.
+func (b *Bool) UnmarshalJSON(data []byte) error {
 	var value *bool
 
 	if err := json.Unmarshal(data, &value); err != nil {
@@ -32,23 +34,23 @@ func (this *Bool) UnmarshalJSON(data []byte) error {
 	}
 
 	if value != nil {
-		this.Valid = true
-		this.Bool = *value
+		b.Valid = true
+		b.Bool = *value
 	} else {
-		this.Valid = false
+		b.Valid = false
 	}
 
 	return nil
 }
 
-// Sets the value and valid to true.
-func (this *Bool) SetValid(b bool) {
-	this.Bool = b
-	this.Valid = true
+// SetValid sets the value and valid to true.
+func (b *Bool) SetValid(value bool) {
+	b.Bool = value
+	b.Valid = true
 }
 
-// Sets the value to default and valid to false.
-func (this *Bool) SetNil() {
-	this.Bool = false
-	this.Valid = false
+// SetNil sets the value to default and valid to false.
+func (b *Bool) SetNil() {
+	b.Bool = false
+	b.Valid = false
 }

@@ -5,26 +5,28 @@ import (
 	"encoding/json"
 )
 
-// Nullable int64 type based on sql.NullInt64, that supports parsing to/from JSON.
+// Int64 is a nullable int64 type based on sql.NullInt64, that supports parsing to/from JSON.
 type Int64 struct {
 	sql.NullInt64
 }
 
-// Returns a new nullable Int64 object.
+// NewInt64 returns a new nullable Int64 object.
 // This is equivalent to `null.Int64{sql.NullInt64{Int64: i, Valid: valid}}`.
 func NewInt64(i int64, valid bool) Int64 {
 	return Int64{sql.NullInt64{Int64: i, Valid: valid}}
 }
 
-func (this Int64) MarshalJSON() ([]byte, error) {
-	if this.Valid {
-		return json.Marshal(this.Int64)
+// MarshalJSON implements the encoding json interface.
+func (i Int64) MarshalJSON() ([]byte, error) {
+	if i.Valid {
+		return json.Marshal(i.Int64)
 	}
 
 	return json.Marshal(nil)
 }
 
-func (this *Int64) UnmarshalJSON(data []byte) error {
+// UnmarshalJSON implements the encoding json interface.
+func (i *Int64) UnmarshalJSON(data []byte) error {
 	var value *int64
 
 	if err := json.Unmarshal(data, &value); err != nil {
@@ -32,23 +34,23 @@ func (this *Int64) UnmarshalJSON(data []byte) error {
 	}
 
 	if value != nil {
-		this.Valid = true
-		this.Int64 = *value
+		i.Valid = true
+		i.Int64 = *value
 	} else {
-		this.Valid = false
+		i.Valid = false
 	}
 
 	return nil
 }
 
-// Sets the value and valid to true.
-func (this *Int64) SetValid(i int64) {
-	this.Int64 = i
-	this.Valid = true
+// SetValid sets the value and valid to true.
+func (i *Int64) SetValid(value int64) {
+	i.Int64 = value
+	i.Valid = true
 }
 
-// Sets the value to default and valid to false.
-func (this *Int64) SetNil() {
-	this.Int64 = 0
-	this.Valid = false
+// SetNil sets the value to default and valid to false.
+func (i *Int64) SetNil() {
+	i.Int64 = 0
+	i.Valid = false
 }
