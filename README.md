@@ -22,7 +22,7 @@ go get github.com/emvi/null
 
 ## Usage
 
-Here is a short example demonstrating the string type. The other types (int64, float64 and bool) work in the same way.
+Here is a short example demonstrating the string type. The other types (int64, float64 and bool) work in the same manner.
 
 ```
 package main
