@@ -34,10 +34,9 @@ func (f *Float64) UnmarshalJSON(data []byte) error {
 	}
 
 	if value != nil {
-		f.Valid = true
-		f.Float64 = *value
+		f.SetValid(*value)
 	} else {
-		f.Valid = false
+		f.SetNil()
 	}
 
 	return nil

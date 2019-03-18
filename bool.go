@@ -34,10 +34,9 @@ func (b *Bool) UnmarshalJSON(data []byte) error {
 	}
 
 	if value != nil {
-		b.Valid = true
-		b.Bool = *value
+		b.SetValid(*value)
 	} else {
-		b.Valid = false
+		b.SetNil()
 	}
 
 	return nil

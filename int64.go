@@ -34,10 +34,9 @@ func (i *Int64) UnmarshalJSON(data []byte) error {
 	}
 
 	if value != nil {
-		i.Valid = true
-		i.Int64 = *value
+		i.SetValid(*value)
 	} else {
-		i.Valid = false
+		i.SetNil()
 	}
 
 	return nil
