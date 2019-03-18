@@ -1,7 +1,9 @@
 package null
 
 import (
+	"database/sql/driver"
 	"encoding/json"
+	"errors"
 	"time"
 )
 
@@ -41,6 +43,32 @@ func (t *Time) UnmarshalJSON(data []byte) error {
 	}
 
 	return nil
+}
+
+// Scan implements the Scanner interface.
+func (t *Time) Scan(value interface{}) error {
+	if value == nil {
+		t.SetNil()
+		return nil
+	}
+
+	v, ok := value.(time.Time)
+
+	if !ok {
+		return errors.New("unexpected type")
+	}
+
+	t.Time = v
+	return nil
+}
+
+// Value implements the driver Valuer interface.
+func (t Time) Value() (driver.Value, error) {
+	if !t.Valid {
+		return nil, nil
+	}
+
+	return t.Time, nil
 }
 
 // SetValid sets the value and valid to true.

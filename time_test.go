@@ -39,7 +39,7 @@ func TestUnmarshalTime(t *testing.T) {
 	now := time.Now()
 	nowStrBytes, _ := json.Marshal(now)
 	nowStr := string(nowStrBytes)
-	str := `{"value": `+nowStr+`}`
+	str := `{"value": ` + nowStr + `}`
 	var value testTime
 
 	if err := json.Unmarshal([]byte(str), &value); err != nil {
@@ -58,6 +58,33 @@ func TestUnmarshalTime(t *testing.T) {
 
 	if value.Value.Valid {
 		t.Fatal("Unmarshalled null Time must be invalid")
+	}
+}
+
+func TestScanTime(t *testing.T) {
+	now := time.Now()
+	str := "test"
+	var value Time
+
+	if err := value.Scan(&str); err.Error() != "unexpected type" {
+		t.Fatalf("Time must return error, but was: %v", err)
+	}
+
+	if err := value.Scan(now); err != nil {
+		t.Fatalf("Time must be scanned, but was: %v", err)
+	}
+
+	if !value.Time.Equal(now) {
+		t.Fatalf("Scanned time must be equal to input, but was: %v == %v", value.Time, now)
+	}
+}
+
+func TestValueTime(t *testing.T) {
+	value := NewTime(time.Now(), true)
+	out, err := value.Value()
+
+	if err != nil || out == nil {
+		t.Fatalf("Time must return value, but was: %v", err)
 	}
 }
 
