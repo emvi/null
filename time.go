@@ -58,7 +58,7 @@ func (t *Time) Scan(value interface{}) error {
 		return errors.New("unexpected type")
 	}
 
-	t.Time = v
+	t.SetValid(v)
 	return nil
 }
 
