@@ -40,8 +40,9 @@ type NullableString struct {
 }
 
 func main() {
-    str := null.NewString("nullable string", true)
+    str := NullableString{null.NewString("nullable string", true)}
     // or long version: str := NullableString{null.String{sql.NullString{String: "nullable string", Valid: true}}}
+    
     data, _ := json.Marshal(str)
     fmt.Println(string(data)) // -> {"value": "nullable"}
 
