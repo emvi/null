@@ -1,6 +1,7 @@
 package null
 
 import (
+	"database/sql"
 	"encoding/json"
 	"testing"
 	"time"
@@ -22,7 +23,7 @@ func TestMarshalTime(t *testing.T) {
 	now := time.Now()
 	nowStrBytes, _ := json.Marshal(now)
 	nowStr := string(nowStrBytes)
-	value := Time{Time: now, Valid: true}
+	value := Time{sql.NullTime{Time: now, Valid: true}}
 
 	if data, err := json.Marshal(value); err != nil || string(data) != nowStr {
 		t.Fatalf("Time must be marshalled to value, but was %v %v", err, string(data))
@@ -66,7 +67,7 @@ func TestScanTime(t *testing.T) {
 	str := "test"
 	var value Time
 
-	if err := value.Scan(&str); err.Error() != "unexpected type" {
+	if err := value.Scan(&str); err == nil || err.Error() != "unexpected type" {
 		t.Fatalf("Time must return error, but was: %v", err)
 	}
 

@@ -1,6 +1,7 @@
 package null
 
 import (
+	"database/sql"
 	"database/sql/driver"
 	"encoding/json"
 	"errors"
@@ -9,14 +10,13 @@ import (
 
 // Time is a nullable time.Time, that supports parsing to/from JSON.
 type Time struct {
-	time.Time
-	Valid bool
+	sql.NullTime
 }
 
 // NewTime returns a new nullable time.Time object.
 // This is equivalent to `null.Time{Time: t, Valid: valid}`.
 func NewTime(t time.Time, valid bool) Time {
-	return Time{Time: t, Valid: valid}
+	return Time{sql.NullTime{Time: t, Valid: valid}}
 }
 
 // MarshalJSON implements the encoding json interface.

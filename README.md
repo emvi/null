@@ -20,6 +20,8 @@ To install "null", run go get within your project:
 go get github.com/emvi/null
 ```
 
+Note that from 1.3 on "null" requires Go version 1.13 or newer.
+
 ## Usage
 
 Here is a short example demonstrating the string type. The other types (int64, float64 and bool) work in the same manner.
