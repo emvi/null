@@ -10,7 +10,7 @@
 
 ## Description
 
-This package provides nullable Go types for bool, float64, int64, string and time.Time replacing sql.NullString, sql.NullInt64, ... that can be marshalled/unmarshalled to/from JSON.
+This package provides nullable Go types for bool, float64, int64, int32, string and time.Time replacing sql.NullString, sql.NullInt64, ... that can be marshalled/unmarshalled to/from JSON.
 
 ## Installation
 
