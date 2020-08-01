@@ -7,6 +7,7 @@
 [![GoDoc](https://godoc.org/github.com/emvi/null?status.svg)](https://godoc.org/github.com/emvi/null)
 [![CircleCI](https://circleci.com/gh/emvi/null.svg?style=svg)](https://circleci.com/gh/emvi/null)
 [![Go Report Card](https://goreportcard.com/badge/github.com/emvi/null)](https://goreportcard.com/report/github.com/emvi/null)
+<a href="https://discord.gg/5UWdRh"><img src="https://img.shields.io/discord/739184135649886288?logo=discord" alt="Chat on Discord"></a>
 
 ## Description
 
