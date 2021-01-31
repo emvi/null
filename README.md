@@ -1,7 +1,3 @@
-<p align="center">
-    <img src="nullgopher.svg" width="300px" />
-</p>
-
 # Nullable Go types
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/emvi/null?status.svg)](https://pkg.go.dev/github.com/emvi/null?status)
@@ -62,3 +58,7 @@ func main() {
 ## License
 
 MIT
+
+<p align="center">
+    <img src="nullgopher.svg" width="300px" />
+</p>
